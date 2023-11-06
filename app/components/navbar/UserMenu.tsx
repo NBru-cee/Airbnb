@@ -5,6 +5,7 @@ import Avatar from "../Avatar";
 import MenuItem from "./MenuItem";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useLoginModal from "@/app/hooks/useLoginModal";
+import useRentModal from "@/app/hooks/useRentModal";
 import { signOut } from "next-auth/react";
 import { SafeUser } from "@/app/types";
 
@@ -20,17 +21,30 @@ const UserMenu: React.FC<MenuProps> = ({ currentUser }) => {
 
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+    const rentModal = useRentModal();
+
+    const onRent = useCallback(() => {
+        if (!currentUser) {
+            return loginModal.onOpen();
+        }
+
+        //open rent modal
+        rentModal.onOpen();
+    }, [currentUser, loginModal, rentModal]);
 
     return (
         <div className="relative">
-            <div
-                className="flex flex-row items-center gap-3"
-                onClick={toggleOpen}
-            >
-                <div className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer">
+            <div className="flex flex-row items-center gap-3">
+                <div
+                    onClick={onRent}
+                    className="hidden md:block text-sm font-semibold py-3 px-4 rounded-full hover:bg-neutral-100 transition cursor-pointer"
+                >
                     Airbnb your home
                 </div>
-                <div className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition">
+                <div
+                    className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-200 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
+                    onClick={toggleOpen}
+                >
                     <AiOutlineMenu />
                     <div className="hidden sm:block">
                         <Avatar src={currentUser?.image} />
@@ -53,7 +67,7 @@ const UserMenu: React.FC<MenuProps> = ({ currentUser }) => {
                                     label="My properties"
                                 />
                                 <MenuItem
-                                    onClick={() => {}}
+                                    onClick={rentModal.onOpen}
                                     label="Airbnb my home"
                                 />
                                 <hr />
