@@ -1,10 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
-        domains: [
-            "avatars.githubusercontent.com",
-            "res.cloudinary.com",
-            "lh3.googleusercontent.com",
+        remotePatterns: [
+            {
+                hostname: "avatars.githubusercontent.com",
+            },
+            {
+                hostname: "res.cloudinary.com",
+            },
+            {
+                hostname: "lh3.googleusercontent.com",
+            },
         ],
     },
 };
