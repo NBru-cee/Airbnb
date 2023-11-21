@@ -19,7 +19,7 @@ interface ListingCardProps {
     currentUser: SafeUser | null;
 }
 
-const ListingCard: React.FC<ListingCardProps> = async ({
+const ListingCard: React.FC<ListingCardProps> = ({
     data,
     reservation,
     onAction,

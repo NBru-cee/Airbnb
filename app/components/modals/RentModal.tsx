@@ -114,7 +114,7 @@ const RentModal = () => {
 
     const Map = useMemo(
         () => dynamic(() => import("../Map"), { ssr: false }),
-        [location]
+        []
     );
 
     let bodyContent = (
