@@ -15,11 +15,13 @@ import Modal from "./Modal";
 import Input from "../inputs/Input";
 import Heading from "../navbar/Heading";
 import Button from "../navbar/Button";
+import { useRouter } from "next/navigation";
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter()
 
     const {
         register,
@@ -42,6 +44,7 @@ const RegisterModal = () => {
                 toast.success("Registered!");
                 registerModal.onClose();
                 loginModal.onOpen();
+                router.refresh()
             })
             .catch((error) => {
                 toast.error(error);
