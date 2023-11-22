@@ -1,18 +1,17 @@
-import ClientOnly from "./components/ClientOnly";
-import Container from "./components/Container";
-import EmptyState from "./components/EmptyState";
+import ClientOnly from "@/app/components/ClientOnly";
+import Container from "@/app/components/Container";
+import EmptyState from "@/app/components/EmptyState";
 import getListings, { IListingParams } from "@/app/actions/getListings";
 import ListingCard from "@/app/components/listings/ListingCard";
-import getCurrentUser from "./actions/getCurrentUser";
+import getCurrentUser from "@/app/actions/getCurrentUser";
+import { SafeListing, SafeUser } from "./types";
 
 interface HomeProps {
-    searchParams: IListingParams;
+    listings: SafeListing[]; // Assuming Listing is the type of your data
+    currentUser: SafeUser; // Assuming User is the type of your user data
 }
 
-const Home = async ({ searchParams }:HomeProps) => {
-    const listings = await getListings(searchParams);
-    const currentUser = await getCurrentUser();
-
+const Home = ({ listings, currentUser }: HomeProps) => {
     if (listings.length === 0) {
         return (
             <ClientOnly>
@@ -37,5 +36,18 @@ const Home = async ({ searchParams }:HomeProps) => {
         </ClientOnly>
     );
 };
+
+export async function getStaticProps() {
+    const searchParams: IListingParams = {}; // Define your search parameters here
+    const listings = await getListings(searchParams);
+    const currentUser = await getCurrentUser();
+
+    return {
+        props: {
+            listings,
+            currentUser,
+        },
+    };
+}
 
 export default Home;
