@@ -1,4 +1,5 @@
 "use client";
+
 import { categories } from "@/app/components/navbar/Categories";
 import Container from "@/app/components/Container";
 import { SafeListing, SafeReservation, SafeUser } from "@/app/types";
