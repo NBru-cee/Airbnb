@@ -40,7 +40,7 @@ const SearchModal = () => {
             dynamic(() => import("../Map"), {
                 ssr: false,
             }),
-        []
+        [location]
     );
 
     const onBack = useCallback(() => {
@@ -183,8 +183,8 @@ const SearchModal = () => {
             isOpen={searchModal.isOpen}
             onSubmit={onSubmit}
             onClose={searchModal.onClose}
+            actionLabel={actionLabel}
             title="Filters"
-            actionLabel="Search"
             body={bodyContent}
             secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
             secondaryActionLabel={secondaryActionLabel}
