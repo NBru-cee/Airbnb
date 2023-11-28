@@ -29,6 +29,7 @@
     "react-leaflet": "^4.2.1",
     "react-select": "^5.7.7",
     "react-spinners": "^0.13.8",
+    "sharp": "^0.32.6",
     "world-countries": "^5.0.0",
     "zustand": "^4.4.5"
   },
