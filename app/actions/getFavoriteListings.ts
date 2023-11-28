@@ -1,6 +1,7 @@
+"use server";
+
 import prisma from "@/app/libs/prismadb";
 import getCurrentUser from "./getCurrentUser";
-import { NextResponse } from "next/server";
 
 export default async function getFavoriteListings() {
     try {

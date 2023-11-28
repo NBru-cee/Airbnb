@@ -1,3 +1,5 @@
+"use server";
+
 import prisma from "@/app/libs/prismadb";
 
 export interface IListingParams {
@@ -72,7 +74,7 @@ export default async function getListings(params: IListingParams) {
                 },
             };
         }
-        
+
         const listings = await prisma.listing.findMany({
             where: query,
             orderBy: {
